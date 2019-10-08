@@ -16,10 +16,11 @@ public class SimpleFigure {
     private int width;
     private int height;
 
-    public SimpleFigure(float x, float y, int width, int height){
+    public SimpleFigure(float x, float y, int width, int height) {
         this.height = height;
         this.width = width;
-        position = new Vector2(x,y);
+        position = new Vector2(x, y);
+
     }
 
 
