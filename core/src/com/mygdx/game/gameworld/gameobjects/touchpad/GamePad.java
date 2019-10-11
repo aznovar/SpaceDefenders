@@ -2,6 +2,7 @@ package com.mygdx.game.gameworld.gameobjects.touchpad;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -10,12 +11,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.gameworld.gameobjects.ship.PlayerShip;
 
 
 /**
  * Created by Andrey Chelkanov(aznovar)
+ */
+
+/*TODO
+Колян, нужно этот класс переделать в Screen класс и запускать его из класса типа Game,
+предварительно создав его
  */
 public class GamePad extends ApplicationAdapter {
 
@@ -23,17 +28,13 @@ public class GamePad extends ApplicationAdapter {
     public PlayerShip playerShip;
     public SpriteBatch batch;
     public Touchpad touchpad;
-    public Texture bg1, bg2, touchpadBg, touchpadKonb, rocketSheet;
-    public TextureRegionDrawable padBG, padKnob;
-    public Touchpad.TouchpadStyle touchpadStyle;
-    final int ROCKET_FRAME_COLS = 4, ROCKET_FRAME_ROWS = 1,
-            ASTEROID_FRAME_COLS = 8, ASTEROID_FRAME_ROWS = 1,
-            START = 0, RUNING = 1, GAME_OVER = 2;
-    public Rectangle Rocket;
+    public Texture touchpadBg, touchpadKonb, rocketSheet;
+    Rectangle rocket;
     int ROCKET_SPEED = 5;
-    public Animation<TextureRegion> rocketAnimation, asteroidAAnimation;
-    float yMax, yCoordBg1, yCoordBg2, stateTime, lastAsteroid_time;
-
+    public Animation<TextureRegion> rocketAnimation;
+    float stateTime;
+    public static int GENERAL_WIDTH = 480; // 480
+    public static int GENERAL_HEIGHT = 720; // 720
 
     public void create() {
         stage = new Stage();
@@ -41,14 +42,10 @@ public class GamePad extends ApplicationAdapter {
         batch = new SpriteBatch();
 
         playerShip = new PlayerShip();
+        rocket = playerShip.addRectangle();
+        rocketAnimation = playerShip.setupAnimation();
 
-        touchpadBg = new Texture("touchpad_bg.png");
-        touchpadKonb = new Texture("touchpad_knob.png");
-        padBG = new TextureRegionDrawable(touchpadBg);
-        padKnob = new TextureRegionDrawable(touchpadKonb);
-        touchpadStyle = new Touchpad.TouchpadStyle(padBG, padKnob);
-        touchpad = new Touchpad(20f, touchpadStyle);
-        touchpad.setBounds(Gdx.graphics.getWidth() / 2 - 75, Gdx.graphics.getHeight() / 10 - 75, 150, 150);
+        touchpad = new Pad().setupTouchpad();
         stage.addActor(touchpad);
     }
 
@@ -58,8 +55,10 @@ public class GamePad extends ApplicationAdapter {
         TextureRegion RocketcurrentFrame = rocketAnimation.getKeyFrame(stateTime, true);
         update();
         batch.begin();
-        batch.draw(RocketcurrentFrame, Rocket.x, Rocket.y, Rocket.width, Rocket.height);
+        batch.draw(RocketcurrentFrame, rocket.x, rocket.y, rocket.width, rocket.height);
+
         batch.end();
+        stage.act();
         stage.draw();
     }
 
@@ -69,20 +68,20 @@ public class GamePad extends ApplicationAdapter {
 
 
     public void update() {
-        if (touchpad.isTouched() && playerShip.addRectangle().x >= 0 && playerShip.addRectangle().x <= Gdx.graphics.getWidth() - playerShip.addRectangle().width) {
-            playerShip.addRectangle().x += touchpad.getKnobPercentX() * ROCKET_SPEED;
-        } else if (playerShip.addRectangle().x < 0) {
-            playerShip.addRectangle().x = 0;
-        } else if (playerShip.addRectangle().x > Gdx.graphics.getWidth() - playerShip.addRectangle().width) {
-            playerShip.addRectangle().x = Gdx.graphics.getWidth() - playerShip.addRectangle().width;
+        if (touchpad.isTouched() && rocket.x >= 0 && rocket.x <= Gdx.graphics.getWidth() - rocket.width) {
+            rocket.x += touchpad.getKnobPercentX() * ROCKET_SPEED;
+        } else if (rocket.x < 0) {
+            rocket.x = 0;
+        } else if (rocket.x > Gdx.graphics.getWidth() - rocket.width) {
+            rocket.x = Gdx.graphics.getWidth() - rocket.width;
         }
 
-        if (touchpad.isTouched() && playerShip.addRectangle().y >= 0 && playerShip.addRectangle().y <= Gdx.graphics.getHeight() - playerShip.addRectangle().height) {
-            playerShip.addRectangle().y += touchpad.getKnobPercentY() * ROCKET_SPEED;
-        } else if (Rocket.y < 0) {
-            playerShip.addRectangle().y = 0;
-        } else if (playerShip.addRectangle().y > Gdx.graphics.getHeight() - playerShip.addRectangle().height) {
-            playerShip.addRectangle().y = Gdx.graphics.getHeight() - playerShip.addRectangle().height;
+        if (touchpad.isTouched() && rocket.y >= 0 && rocket.y <= Gdx.graphics.getHeight() - rocket.height) {
+            rocket.y += touchpad.getKnobPercentY() * ROCKET_SPEED;
+        } else if (rocket.y < 0) {
+            rocket.y = 0;
+        } else if (rocket.y > Gdx.graphics.getHeight() - rocket.height) {
+            rocket.y = Gdx.graphics.getHeight() - rocket.height;
         }
 
     }
