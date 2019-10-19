@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 
-public class MainScreen implements Screen {
-
+public class GameScreen implements Screen {
+//TODO перекинуть логику игры сюда, если не найдется альтернативы
     @Override
     public void show() {
         Gdx.app.log("GameScreen", "show called");

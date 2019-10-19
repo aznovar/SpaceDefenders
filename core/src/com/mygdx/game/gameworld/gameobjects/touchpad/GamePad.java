@@ -2,7 +2,6 @@ package com.mygdx.game.gameworld.gameobjects.touchpad;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -19,7 +18,7 @@ import com.mygdx.game.gameworld.gameobjects.ship.PlayerShip;
  */
 
 /*TODO
-Колян, нужно этот класс переделать в Screen класс и запускать его из класса типа Game,
+Нужно этот класс переделать в Screen класс и запускать его из класса типа Game,
 предварительно создав его
  */
 public class GamePad extends ApplicationAdapter {
