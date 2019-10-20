@@ -1,7 +1,7 @@
-package com.mygdx.game.gameworld.gameobjects.touchpad;
+package com.mygdx.game.gameScreens;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,17 +12,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.mygdx.game.gameworld.gameobjects.ship.PlayerShip;
+import com.mygdx.game.gameworld.gameobjects.touchpad.Pad;
 
-
-/**
- * Created by Andrey Chelkanov(aznovar)
- */
-
-/*TODO
-Колян, нужно этот класс переделать в Screen класс и запускать его из класса типа Game,
-предварительно создав его
- */
-public class GamePad extends ApplicationAdapter {
+public class GameScreen extends ScreenAdapter {
 
     public Stage stage;
     public PlayerShip playerShip;
@@ -33,10 +25,8 @@ public class GamePad extends ApplicationAdapter {
     int ROCKET_SPEED = 5;
     public Animation<TextureRegion> rocketAnimation;
     float stateTime;
-    public static int GENERAL_WIDTH = 480; // 480
-    public static int GENERAL_HEIGHT = 720; // 720
 
-    public void create() {
+    public GameScreen() {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         batch = new SpriteBatch();
@@ -49,7 +39,8 @@ public class GamePad extends ApplicationAdapter {
         stage.addActor(touchpad);
     }
 
-    public void render() {
+    @Override
+    public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Gdx.graphics.getDeltaTime());
         TextureRegion RocketcurrentFrame = rocketAnimation.getKeyFrame(stateTime, true);
@@ -60,12 +51,41 @@ public class GamePad extends ApplicationAdapter {
         batch.end();
         stage.act();
         stage.draw();
+
     }
 
+    @Override
     public void resize(int width, int height) {
-        stage.getViewport().update(width, height, true);
+        Gdx.app.log("GameScreen", "resizing");
+
+
     }
 
+    @Override
+    public void pause() {
+        Gdx.app.log("GameScreen", "pause called");
+
+
+    }
+
+    @Override
+    public void resume() {
+        Gdx.app.log("GameScreen", "resume called");
+    }
+
+    @Override
+    public void hide() {
+        Gdx.app.log("GameScreen", "hide called");
+    }
+
+    @Override
+    public void dispose() {
+        batch.dispose();
+        rocketSheet.dispose();
+        touchpadBg.dispose();
+        touchpadKonb.dispose();
+        stage.dispose();
+    }
 
     public void update() {
         if (touchpad.isTouched() && rocket.x >= 0 && rocket.x <= Gdx.graphics.getWidth() - rocket.width) {
@@ -85,15 +105,4 @@ public class GamePad extends ApplicationAdapter {
         }
 
     }
-
-    public void dispose() {
-        batch.dispose();
-        rocketSheet.dispose();
-        touchpadBg.dispose();
-        touchpadKonb.dispose();
-        stage.dispose();
-//        touchpadBg.dispose();
-//        touchpadKonb.dispose();
-    }
-
 }

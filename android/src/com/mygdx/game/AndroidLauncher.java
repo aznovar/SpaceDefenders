@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.mygdx.game.gameworld.gameobjects.touchpad.GamePad;
 
 
 public class AndroidLauncher extends AndroidApplication {
@@ -13,6 +12,6 @@ public class AndroidLauncher extends AndroidApplication {
         super.onCreate(savedInstanceState);
 
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-        initialize(new GamePad(), config);
+        initialize(new MyGdxGame(), config);
     }
 }
