@@ -337,11 +337,6 @@
       "fontColor": "white"
     }
   },
-  "com.kotcrab.vis.ui.widget.Tooltip$TooltipStyle": {
-    "default": {
-      "background": "list"
-    }
-  },
   "com.kotcrab.vis.ui.widget.LinkLabel$LinkLabelStyle": {
     "default": {
       "fontColor": "link",

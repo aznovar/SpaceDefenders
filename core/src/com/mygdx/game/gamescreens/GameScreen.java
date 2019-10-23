@@ -1,7 +1,6 @@
-package com.mygdx.game.gameScreens;
+package com.mygdx.game.gamescreens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,11 +10,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.gameworld.gameobjects.ship.PlayerShip;
 import com.mygdx.game.gameworld.gameobjects.touchpad.Pad;
 
+import javax.activation.MailcapCommandMap;
+
 public class GameScreen extends ScreenAdapter {
 
+
+    MyGdxGame game;
     public Stage stage;
     public PlayerShip playerShip;
     public SpriteBatch batch;
@@ -26,7 +30,8 @@ public class GameScreen extends ScreenAdapter {
     public Animation<TextureRegion> rocketAnimation;
     float stateTime;
 
-    public GameScreen() {
+    public GameScreen(MyGdxGame newGame) {
+        this.game = newGame;
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         batch = new SpriteBatch();
