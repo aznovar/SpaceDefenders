@@ -32,6 +32,7 @@ public class MyGdxGame extends Game {
         SCALE_FACTOR = (100 / (720 * 100 / (float) Math.max(GENERAL_HEIGHT, GENERAL_WIDTH)) + 100 / (480 * 100 / (float) Math.min(GENERAL_HEIGHT, GENERAL_WIDTH))) / 2;
         SCALE_X = 100 / (480 * 100 / (float) GENERAL_WIDTH);
         SCALE_Y = 100 / (720 * 100 / (float) GENERAL_HEIGHT);
+
         this.setScreen(new MenuScreen(this));
     }
 
