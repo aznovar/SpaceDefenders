@@ -33,7 +33,7 @@ public class MyGdxGame extends Game {
         SCALE_X = 100 / (480 * 100 / (float) GENERAL_WIDTH);
         SCALE_Y = 100 / (720 * 100 / (float) GENERAL_HEIGHT);
 
-        this.setScreen(new SettingsScreen());
+        this.setScreen(new SettingsScreen(this));
     }
 
     @Override
@@ -47,6 +47,7 @@ public class MyGdxGame extends Game {
     void loadAssets() {
         Assets.manager = new AssetManager();
         Assets.loadSkin();
+        Assets.loadBackground();
         Assets.manager.finishLoading();
     }
 
