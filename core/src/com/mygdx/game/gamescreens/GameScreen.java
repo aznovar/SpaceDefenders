@@ -26,7 +26,7 @@ public class GameScreen extends ScreenAdapter {
     public Touchpad touchpad;
     public Texture touchpadBg, touchpadKonb, rocketSheet;
     Rectangle rocket;
-    int ROCKET_SPEED = 5;
+    int ROCKET_SPEED = 100;
     public Animation<TextureRegion> rocketAnimation;
     float stateTime;
 
