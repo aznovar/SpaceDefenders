@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.Input;
-
 
 
 /**
@@ -18,7 +16,8 @@ public class PlayerShip {
     Rectangle rocket;
     Texture rocketSheet;
     final int ROCKET_FRAME_COLS = 4, ROCKET_FRAME_ROWS = 1;
-    private float x,y;
+    private float x = Gdx.graphics.getWidth() - 300;
+    private float y = Gdx.graphics.getHeight() / 2;
     private float newX, newY;
     private float speed = 400;
     private float preferredShipWidth = 100;
@@ -53,6 +52,7 @@ public class PlayerShip {
             for (int j = 0; j < ROCKET_FRAME_COLS; j++) {
                 rocketFrame[Rindex++] = Rtmp[i][j];
             }
+
         }
         return rocketFrame;
     }
@@ -64,16 +64,16 @@ public class PlayerShip {
 
             float xToGo, yToGo;
 
-            xToGo = MoveTowards(this.x, newX - Gdx.graphics.getWidth()/2, deltaTime * this.speed);
-            yToGo = MoveTowards(this.y, -newY + Gdx.graphics.getHeight() , deltaTime * this.speed);
+            xToGo = moveTowards(this.x, newX - Gdx.graphics.getWidth()/2, deltaTime * this.speed);
+            yToGo = moveTowards(this.y, -newY + Gdx.graphics.getHeight() , deltaTime * this.speed);
 
             this.x = xToGo;
             this.y = yToGo;
 
                }
     }
-
-    public float MoveTowards(float current, float target, float maxDelta) {
+    //todo отрегулировать движение
+    public float moveTowards(float current, float target, float maxDelta) {
         if (Math.abs(target - current) <= maxDelta) {
             return target;
         }
@@ -82,7 +82,7 @@ public class PlayerShip {
 
     public void draw(SpriteBatch batch, float delta) {
         stateTime += delta;
-        batch.draw(setupAnimation().getKeyFrame(stateTime, true), this.x, this.y, this.preferredShipWidth, this.preferredShipHeight);
-
+        batch.draw(setupAnimation().getKeyFrame(stateTime, true), this.x, this.y, this.preferredShipWidth, this.preferredShipHeight ,this.preferredShipWidth,this.preferredShipHeight,2,2,90f);
+        //todo разобраться как ЭТО работает
     }
 }

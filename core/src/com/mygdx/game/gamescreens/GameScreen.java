@@ -54,12 +54,13 @@ public class GameScreen extends ScreenAdapter  {
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Gdx.graphics.getDeltaTime());
-        TextureRegion RocketcurrentFrame = rocketAnimation.getKeyFrame(stateTime, true);
+//        TextureRegion RocketcurrentFrame = rocketAnimation.getKeyFrame(stateTime, true);
 //        update();
         batch.begin();
-        batch.draw(RocketcurrentFrame, rocket.x, rocket.y, rocket.width, rocket.height);
+//        batch.draw(RocketcurrentFrame, rocket.x, rocket.y, rocket.width, rocket.height);
         playerShip.performInput(delta);
         playerShip.draw(batch,delta);
+
 
         batch.end();
         stage.act();
