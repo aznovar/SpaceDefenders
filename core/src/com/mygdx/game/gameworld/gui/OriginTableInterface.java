@@ -1,7 +1,5 @@
-package com.mygdx.game.assets.gui;
+package com.mygdx.game.gameworld.gui;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 /**
@@ -11,20 +9,22 @@ interface OriginTableInterface {
 
     /**
      * A method that allows you to add a background to your table
+     *
      * @return
      */
-    Table createTableWithBackground();
+    Table createTableLikeBackground();
 
     /**
      * A method that allows you to add fields to your table
+     *
      * @return
      */
-    Table addFieldForTable(Table table);
+    Table createTableForFields();
 
     /**
      * A method that allows you to add buttons to your table
-     * @param table
+     *
      * @return
      */
-    Table addButtonForTable(Table table);
+    Table createTableForButtons();
 }
