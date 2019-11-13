@@ -13,11 +13,19 @@ import java.util.List;
 
 public class SettingsImage {
 
-    public Image initImageForField() {
+    public List<Image> initImageForField() {
+        List<Image> listofImage = new ArrayList<>();
         TextureAtlas textureAtlas = new TextureAtlas(Const.ATLAS_DIRECTORY);
-        TextureRegion textureRegion = textureAtlas.findRegion(Const.FIELD_FOR_SETTINGS_TABLE);
-        Drawable drawable = new TextureRegionDrawable(textureRegion);
-        return new Image(drawable);
+        TextureRegion textureRegionField = textureAtlas.findRegion(Const.FIELD_FOR_SETTINGS_TABLE);
+        TextureRegion textureRegionGfx = textureAtlas.findRegion(Const.GFX);
+        TextureRegion textureRegionSfx = textureAtlas.findRegion(Const.SFX);
+        Drawable drawableField = new TextureRegionDrawable(textureRegionField);
+        Drawable drawableGfx = new TextureRegionDrawable(textureRegionGfx);
+        Drawable drawableSfx = new TextureRegionDrawable(textureRegionSfx);
+        listofImage.add(new Image(drawableField));
+        listofImage.add(new Image(drawableGfx));
+        listofImage.add(new Image(drawableSfx));
+        return listofImage;
     }
 
     public Image initBackground(){
@@ -65,6 +73,7 @@ public class SettingsImage {
         listofImage.add(new Image(drawableUntouchCheckBox));
         listofImage.add(new Image(drawableMusic));
         listofImage.add(new Image(drawableSound));
+
         return listofImage;
     }
 }

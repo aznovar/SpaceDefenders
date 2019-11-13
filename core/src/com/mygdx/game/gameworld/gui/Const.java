@@ -20,5 +20,9 @@ public final class Const {
 
     public static final String SOUND = "text_0010_SOUND";
 
+    public static final String GFX = "text_0007_GFX";
+
+    public static final String SFX = "text_0008_SFX";
+
 
 }

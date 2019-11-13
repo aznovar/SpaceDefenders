@@ -30,7 +30,7 @@ public class SettingsUIFragment implements OriginTableInterface {
         settingsBackgroundTable.row();
         settingsBackgroundTable.add(createTableForFields()).padTop(PERCENT_OF_HEIGHT/-1.3f);
         settingsBackgroundTable.row();
-        settingsBackgroundTable.add(createTableForButtons()).expand().padTop(PERCENT_OF_HEIGHT/-2.4f);
+        settingsBackgroundTable.add(createTableForButtons()).expand().padTop(PERCENT_OF_HEIGHT/-2.2f);
        // settingsBackgroundTable.setDebug(true);
        // settingsBackgroundTable.debugActor();
         settingsBackgroundTable.setFillParent(true);
@@ -41,12 +41,14 @@ public class SettingsUIFragment implements OriginTableInterface {
     public Table createTableForFields() {
         Table settingsFieldsTable = new Table();
         SettingsImage settingsImage = new SettingsImage();
+        settingsFieldsTable.add(settingsImage.initImageForField().get(1)).width(220).height(50).padRight(25).spaceBottom(50);
         settingsFieldsTable.add(settingsImage.initButtonsForChangeMusicAndSoundLeft()).padRight(10).width(50).height(50).spaceBottom(50);
-        settingsFieldsTable.add(settingsImage.initImageForField()).width(550).height(70).spaceBottom(50);
+        settingsFieldsTable.add(settingsImage.initImageForField().get(0)).width(550).height(70).spaceBottom(50);
         settingsFieldsTable.add(settingsImage.initButtonsForChangeMusicAndSoundRight()).padLeft(10).width(50).height(50).spaceBottom(50);
         settingsFieldsTable.row();
+        settingsFieldsTable.add(settingsImage.initImageForField().get(2)).width(220).height(50).padRight(25);
         settingsFieldsTable.add(settingsImage.initButtonsForChangeMusicAndSoundLeft()).padRight(10).width(50).height(50);
-        settingsFieldsTable.add(settingsImage.initImageForField()).width(550).height(70);
+        settingsFieldsTable.add(settingsImage.initImageForField().get(0)).width(550).height(70);
         settingsFieldsTable.add(settingsImage.initButtonsForChangeMusicAndSoundRight()).padLeft(10).width(50).height(50);
       //  settingsFieldsTable.setDebug(true);
         return settingsFieldsTable;
