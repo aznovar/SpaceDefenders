@@ -22,7 +22,6 @@ public class MyGdxGame extends Game {
     @Override
     public void create() {
         batch = new SpriteBatch();
-        img = new Texture("badlogic.jpg");
         loadAssets();
 
         applicationType = Gdx.app.getType();
@@ -48,6 +47,7 @@ public class MyGdxGame extends Game {
     void loadAssets() {
         Assets.manager = new AssetManager();
         Assets.loadSkin();
+        Assets.loadBackground();
         Assets.manager.finishLoading();
     }
 
