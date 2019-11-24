@@ -1,7 +1,10 @@
 package com.mygdx.game.gamescreens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -16,19 +19,22 @@ import com.mygdx.game.gameworld.gameobjects.touchpad.Pad;
 
 import javax.activation.MailcapCommandMap;
 
-public class GameScreen extends ScreenAdapter {
+import sun.audio.AudioPlayer;
+
+public class GameScreen extends ScreenAdapter  {
 
 
     MyGdxGame game;
     public Stage stage;
     public PlayerShip playerShip;
     public SpriteBatch batch;
-    public Touchpad touchpad;
+    //    public Touchpad touchpad;
     public Texture touchpadBg, touchpadKonb, rocketSheet;
     Rectangle rocket;
     int ROCKET_SPEED = 100;
     public Animation<TextureRegion> rocketAnimation;
     float stateTime;
+    private Controller controller;
 
     public GameScreen(MyGdxGame newGame) {
         this.game = newGame;
@@ -40,22 +46,28 @@ public class GameScreen extends ScreenAdapter {
         rocket = playerShip.addRectangle();
         rocketAnimation = playerShip.setupAnimation();
 
-        touchpad = new Pad().setupTouchpad();
-        stage.addActor(touchpad);
+//        touchpad = new Pad().setupTouchpad();
+//        stage.addActor(touchpad);
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Gdx.graphics.getDeltaTime());
-        TextureRegion RocketcurrentFrame = rocketAnimation.getKeyFrame(stateTime, true);
-        update();
+//        TextureRegion RocketcurrentFrame = rocketAnimation.getKeyFrame(stateTime, true);
+//        update();
         batch.begin();
-        batch.draw(RocketcurrentFrame, rocket.x, rocket.y, rocket.width, rocket.height);
+//        batch.draw(RocketcurrentFrame, rocket.x, rocket.y, rocket.width, rocket.height);
+        playerShip.performInput(delta);
+        playerShip.draw(batch,delta);
+
 
         batch.end();
         stage.act();
         stage.draw();
+
+
+
 
     }
 
@@ -73,6 +85,7 @@ public class GameScreen extends ScreenAdapter {
 
     }
 
+
     @Override
     public void resume() {
         Gdx.app.log("GameScreen", "resume called");
@@ -82,32 +95,18 @@ public class GameScreen extends ScreenAdapter {
     public void hide() {
         Gdx.app.log("GameScreen", "hide called");
     }
-
     @Override
     public void dispose() {
         batch.dispose();
         rocketSheet.dispose();
-        touchpadBg.dispose();
-        touchpadKonb.dispose();
+//        touchpadBg.dispose();
+//        touchpadKonb.dispose();
         stage.dispose();
     }
 
-    public void update() {
-        if (touchpad.isTouched() && rocket.x >= 0 && rocket.x <= Gdx.graphics.getWidth() - rocket.width) {
-            rocket.x += touchpad.getKnobPercentX() * ROCKET_SPEED;
-        } else if (rocket.x < 0) {
-            rocket.x = 0;
-        } else if (rocket.x > Gdx.graphics.getWidth() - rocket.width) {
-            rocket.x = Gdx.graphics.getWidth() - rocket.width;
-        }
 
-        if (touchpad.isTouched() && rocket.y >= 0 && rocket.y <= Gdx.graphics.getHeight() - rocket.height) {
-            rocket.y += touchpad.getKnobPercentY() * ROCKET_SPEED;
-        } else if (rocket.y < 0) {
-            rocket.y = 0;
-        } else if (rocket.y > Gdx.graphics.getHeight() - rocket.height) {
-            rocket.y = Gdx.graphics.getHeight() - rocket.height;
-        }
 
-    }
+
 }
+
+
