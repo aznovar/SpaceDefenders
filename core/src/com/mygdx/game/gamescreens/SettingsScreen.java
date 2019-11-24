@@ -7,10 +7,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.assets.Assets;
+import com.mygdx.game.gameworld.gui.InitCheckBox;
 import com.mygdx.game.gameworld.gui.SettingsUIFragment;
 
 public class SettingsScreen extends ScreenAdapter {
@@ -24,8 +26,11 @@ public class SettingsScreen extends ScreenAdapter {
         this.game = game;
         batch = new SpriteBatch();
         stage = new Stage(new ScreenViewport());
-        Table settingsScreenTable = addTableOnScreen();
+        InitCheckBox initCheckBox = new InitCheckBox();
+        Button button = initCheckBox.init();
+        Table settingsScreenTable = addTableOnScreen(button);
         stage.addActor(settingsScreenTable);
+        Gdx.input.setInputProcessor(stage);
         background = new Sprite(Assets.manager.get(Assets.backForSettings, Texture.class));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
@@ -41,9 +46,9 @@ public class SettingsScreen extends ScreenAdapter {
         stage.draw();
     }
 
-    private Table addTableOnScreen() {
+    private Table addTableOnScreen(Button button) {
         SettingsUIFragment settingsUIFragment = new SettingsUIFragment();
-        Table table = settingsUIFragment.createTableLikeBackground();
+        Table table = settingsUIFragment.createTableLikeBackground(button);
         settingsUIFragment.createTableForFields();
         return table;
     }

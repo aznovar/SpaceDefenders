@@ -25,6 +25,7 @@ public class MenuScreen extends ScreenAdapter {
     private SpriteBatch batch;
     private Skin skin;
     private TextButton playButton;
+    private TextButton settingsButton;
 
     public MenuScreen(MyGdxGame newGame) {
         this.game = newGame;
@@ -54,8 +55,21 @@ public class MenuScreen extends ScreenAdapter {
             }
         });
 
+        settingsButton = new TextButton("Settings", skin);
+
+        settingsButton.getLabel().setFontScale(2.2f * SCALE_FACTOR);
+        settingsButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                batch.dispose();
+                game.setScreen(new SettingsScreen(game));
+            }
+        });
+
         menuTable.padTop(100 * SCALE_FACTOR);
         menuTable.add(playButton).padBottom(48 * SCALE_FACTOR);
+        menuTable.row();
+        menuTable.add(settingsButton).padBottom(48 * SCALE_FACTOR);
         stageForMenu.addActor(menuTable);
         Gdx.input.setInputProcessor(stageForMenu);
     }

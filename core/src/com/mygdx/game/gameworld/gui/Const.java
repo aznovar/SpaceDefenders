@@ -14,7 +14,9 @@ public final class Const {
 
     public static final String ARROW_LEFT = "settings_0000_small_arrow2";
 
-    public static final String CHECK_BOX = "settings_0006_small_button2";
+    public static final String CHECK_BOX_OFF = "settings_0006_small_button2";
+
+    public static final String CHECK_BOX_ON = "settings_0005_small_button1";
 
     public static final String MUSIC = "text_0009_MUSIC";
 
@@ -24,5 +26,25 @@ public final class Const {
 
     public static final String SFX = "text_0008_SFX";
 
+    public static final String SLIDER_DIRECTORY = "atlas-directory/withslider.atlas";
 
+    public static final String KNOB = "element_0055_slider_detail";
+
+    public static final String FILLER = "settings_0004_point";
+
+    public static final String SAVE_BUTTON_ATLAS = "atlas-directory/savebutton.atlas";
+
+    public static final String SAVE_BUTTON_UNPR = "settings_0003_save_button";
+
+    public static final String SAVE_BUTTON_PR = "settings_0003_save_button_pressed";
+
+    public static final String SAVE_BUTTON_WITH_TEXT = "atlas-directory/savewithtext.atlas";
+
+    public static final String SAVE_BUTTON_UNPR_TEXT = "settings_0003_save_button_with_text";
+
+    public static final String SAVE_BUTTON_PR_TEXT = "settings_0003_save_button_pressed_with_text";
+
+    public static final String NEW_BACKGROUND_ATLAS = "atlas-directory/backgroundwithclosebutton.atlas";
+
+    public static final String NEW_BACKGROUND = "Settings_new";
 }

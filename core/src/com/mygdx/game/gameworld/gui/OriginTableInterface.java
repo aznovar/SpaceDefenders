@@ -1,5 +1,6 @@
 package com.mygdx.game.gameworld.gui;
 
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 /**
@@ -12,7 +13,7 @@ interface OriginTableInterface {
      *
      * @return
      */
-    Table createTableLikeBackground();
+    Table createTableLikeBackground(Button button);
 
     /**
      * A method that allows you to add fields to your table
