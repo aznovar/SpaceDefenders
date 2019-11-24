@@ -32,4 +32,10 @@ public final class Const {
 
     public static final String FILLER = "settings_0004_point";
 
+    public static final String SAVE_BUTTON_ATLAS = "atlas-directory/savebutton.atlas";
+
+    public static final String SAVE_BUTTON_UNPR = "settings_0003_save_button";
+
+    public static final String SAVE_BUTTON_PR = "settings_0003_save_button_pressed";
+
 }

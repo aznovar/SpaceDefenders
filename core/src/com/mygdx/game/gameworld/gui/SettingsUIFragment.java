@@ -2,11 +2,11 @@ package com.mygdx.game.gameworld.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -23,14 +23,11 @@ public class SettingsUIFragment implements OriginTableInterface {
 
     @Override
     public Table createTableLikeBackground(Button button) {
-        TextureAtlas textureAtlas = new TextureAtlas(Const.ATLAS_DIRECTORY);
-        TextureRegion textureRegion = textureAtlas.findRegion(Const.BACKGROUND_FOR_SETTINGS_TABLE);
         Table settingsBackgroundTable = new Table();
         SettingsImage settingsImage = new SettingsImage();
         Image background = settingsImage.initBackground();
         settingsBackgroundTable.add(background).width(PERCENT_OF_WIDTH).height(PERCENT_OF_HEIGHT).expand().bottom();
         settingsBackgroundTable.row();
-        //settingsBackgroundTable.setBackground(new TextureRegionDrawable(textureRegion));
         settingsBackgroundTable.add(createTableForCheckBoxes(button)).padTop(PERCENT_OF_HEIGHT/-0.78f);
         settingsBackgroundTable.row();
         settingsBackgroundTable.add(createTableForFields()).padTop(PERCENT_OF_HEIGHT/-1.3f);
@@ -47,14 +44,10 @@ public class SettingsUIFragment implements OriginTableInterface {
         Table settingsFieldsTable = new Table();
         SettingsImage settingsImage = new SettingsImage();
         settingsFieldsTable.add(settingsImage.initImageForField().get(1)).width(220).height(50).padRight(25).spaceBottom(50);
-      //  settingsFieldsTable.add(settingsImage.initButtonsForChangeMusicAndSoundLeft()).padRight(10).width(50).height(50).spaceBottom(50);
         settingsFieldsTable.add(initSlider()).width(550).spaceBottom(50);
-      //  settingsFieldsTable.add(settingsImage.initButtonsForChangeMusicAndSoundRight()).padLeft(10).width(50).height(50).spaceBottom(50);
         settingsFieldsTable.row();
         settingsFieldsTable.add(settingsImage.initImageForField().get(2)).width(220).height(50).padRight(25);
-       // settingsFieldsTable.add(settingsImage.initButtonsForChangeMusicAndSoundLeft()).padRight(10).width(50).height(50);
         settingsFieldsTable.add(initSlider()).width(550).height(70);
-       // settingsFieldsTable.add(settingsImage.initButtonsForChangeMusicAndSoundRight()).padLeft(10).width(50).height(50);
       //  settingsFieldsTable.setDebug(true);
         return settingsFieldsTable;
     }
@@ -62,8 +55,7 @@ public class SettingsUIFragment implements OriginTableInterface {
     @Override
     public Table createTableForButtons() {
         Table settingsButtonSaveTable = new Table();
-        SettingsImage settingsImage = new SettingsImage();
-        settingsButtonSaveTable.add(settingsImage.initImageForSaveButton()).width(200).height(100);
+        settingsButtonSaveTable.add(initSaveButton()).width(200).height(100);
         //settingsButtonSaveTable.setDebug(true);
         return settingsButtonSaveTable;
     }
@@ -94,8 +86,26 @@ public class SettingsUIFragment implements OriginTableInterface {
         Container<Slider> contOfSl = new Container<>(slider);
         contOfSl.setTransform(true);
         contOfSl.size(550,70);
-        //contOfSl.setOrigin(contOfSl.getWidth() / 2, contOfSl.getHeight() / 2);
-//        contOfSl.setScale(1);
         return contOfSl;
+    }
+
+    private Button initSaveButton() {
+        TextureAtlas textureAtlas = new TextureAtlas(Const.SAVE_BUTTON_ATLAS);
+        Skin testSkin = new Skin(textureAtlas);
+        Button.ButtonStyle style = new Button.ButtonStyle();
+        style.up = testSkin.getDrawable(Const.SAVE_BUTTON_UNPR);
+        style.down = testSkin.getDrawable(Const.SAVE_BUTTON_PR);
+        Button testB = new Button(style);
+        testB.addListener(new InputListener() {
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            }
+
+            @Override
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                return true;
+            }
+        });
+        return testB;
     }
 }
