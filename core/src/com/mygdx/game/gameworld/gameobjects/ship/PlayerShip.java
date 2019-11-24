@@ -24,7 +24,7 @@ public class PlayerShip {
     private float x = Gdx.graphics.getWidth() / 2;
     private float y = Gdx.graphics.getHeight() / 15;
     private float touchedX, touchedY, newX, newY;
-    private float speed = 800;
+    private float speed = 1000;
     private float preferredShipWidth = 100;
     private float preferredShipHeight = 100;
     private float stateTime;
@@ -114,12 +114,18 @@ public class PlayerShip {
 //            System.out.println("X COORD " + coordToMoveX);
 //            System.out.println("Y COORD " + coordToMoveY);
 
-//            switch (Gdx.input.getX()) {
-//                case (0):
-//                    newX = 0;
-//                    break;
-//                case (Math.round(Gdx.graphics.getWidth() - this.preferredShipWidth)):
-//
+
+//            if(Gdx.input.getX() == 0) {
+//                newX = 1;
+//            }
+//            else if(Gdx.input.getX() == Gdx.graphics.getWidth() - this.preferredShipWidth) {
+//                newX = Gdx.graphics.getWidth() - this.preferredShipWidth - 1;
+//            }
+//            if(Gdx.input.getY() == 0) {
+//                newY = 1;
+//            }
+//            else if(Gdx.input.getY() == Gdx.graphics.getHeight() - this.preferredShipHeight) {
+//                newY = Gdx.graphics.getHeight() - this.preferredShipHeight - 1;
 //            }
 
 

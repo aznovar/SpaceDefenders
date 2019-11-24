@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.assets.Assets;
 import com.mygdx.game.gamescreens.GameScreen;
+import com.mygdx.game.gamescreens.MenuScreen;
 
 public class MyGdxGame extends Game {
     private SpriteBatch batch;
@@ -32,7 +33,7 @@ public class MyGdxGame extends Game {
         SCALE_X = 100 / (480 * 100 / (float) GENERAL_WIDTH);
         SCALE_Y = 100 / (720 * 100 / (float) GENERAL_HEIGHT);
 
-        this.setScreen(new GameScreen(this));
+        this.setScreen(new MenuScreen(this));
 
     }
 
