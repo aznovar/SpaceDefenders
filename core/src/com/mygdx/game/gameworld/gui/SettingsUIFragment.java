@@ -18,8 +18,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
  */
 public class SettingsUIFragment implements OriginTableInterface {
 
-    private static final Float PERCENT_OF_WIDTH = Gdx.graphics.getWidth() / 1.25f;
-    private static final Float PERCENT_OF_HEIGHT = Gdx.graphics.getHeight() / 1.25f;
+    private static final Float PERCENT_OF_WIDTH = Gdx.graphics.getWidth()/0.6f ;
+    private static final Float PERCENT_OF_HEIGHT = Gdx.graphics.getHeight()/0.6f ;
 
     @Override
     public Table createTableLikeBackground(Button button) {
@@ -28,11 +28,11 @@ public class SettingsUIFragment implements OriginTableInterface {
         Image background = settingsImage.initBackground();
         settingsBackgroundTable.add(background).width(PERCENT_OF_WIDTH).height(PERCENT_OF_HEIGHT).expand().bottom();
         settingsBackgroundTable.row();
-        settingsBackgroundTable.add(createTableForCheckBoxes(button)).padTop(PERCENT_OF_HEIGHT/-0.78f);
+        settingsBackgroundTable.add(createTableForCheckBoxes(button)).padTop(PERCENT_OF_HEIGHT/-0.88f);
         settingsBackgroundTable.row();
-        settingsBackgroundTable.add(createTableForFields()).padTop(PERCENT_OF_HEIGHT/-1.3f);
+        settingsBackgroundTable.add(createTableForFields()).padTop(PERCENT_OF_HEIGHT/-1.1f);
         settingsBackgroundTable.row();
-        settingsBackgroundTable.add(createTableForButtons()).expand().padTop(PERCENT_OF_HEIGHT/-2.2f);
+        settingsBackgroundTable.add(createTableForButtons()).expand().padTop(PERCENT_OF_HEIGHT/-1.5f);
        // settingsBackgroundTable.setDebug(true);
        // settingsBackgroundTable.debugActor();
         settingsBackgroundTable.setFillParent(true);
@@ -90,11 +90,11 @@ public class SettingsUIFragment implements OriginTableInterface {
     }
 
     private Button initSaveButton() {
-        TextureAtlas textureAtlas = new TextureAtlas(Const.SAVE_BUTTON_ATLAS);
+        TextureAtlas textureAtlas = new TextureAtlas(Const.SAVE_BUTTON_WITH_TEXT);
         Skin testSkin = new Skin(textureAtlas);
         Button.ButtonStyle style = new Button.ButtonStyle();
-        style.up = testSkin.getDrawable(Const.SAVE_BUTTON_UNPR);
-        style.down = testSkin.getDrawable(Const.SAVE_BUTTON_PR);
+        style.up = testSkin.getDrawable(Const.SAVE_BUTTON_UNPR_TEXT);
+        style.down = testSkin.getDrawable(Const.SAVE_BUTTON_PR_TEXT);
         Button testB = new Button(style);
         testB.addListener(new InputListener() {
             @Override

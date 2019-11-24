@@ -38,4 +38,13 @@ public final class Const {
 
     public static final String SAVE_BUTTON_PR = "settings_0003_save_button_pressed";
 
+    public static final String SAVE_BUTTON_WITH_TEXT = "atlas-directory/savewithtext.atlas";
+
+    public static final String SAVE_BUTTON_UNPR_TEXT = "settings_0003_save_button_with_text";
+
+    public static final String SAVE_BUTTON_PR_TEXT = "settings_0003_save_button_pressed_with_text";
+
+    public static final String NEW_BACKGROUND_ATLAS = "atlas-directory/backgroundwithclosebutton.atlas";
+
+    public static final String NEW_BACKGROUND = "Settings_new";
 }

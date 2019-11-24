@@ -30,8 +30,8 @@ public class SettingsImage {
 
     public Image initBackground(){
         //TODO переделать на Button with ButtonStyle и выделить в один метод, т.к. повторы
-        TextureAtlas textureAtlas = new TextureAtlas(Const.ATLAS_DIRECTORY);
-        TextureRegion textureRegion = textureAtlas.findRegion(Const.BACKGROUND_FOR_SETTINGS_TABLE);
+        TextureAtlas textureAtlas = new TextureAtlas(Const.NEW_BACKGROUND_ATLAS);
+        TextureRegion textureRegion = textureAtlas.findRegion(Const.NEW_BACKGROUND);
         Drawable drawable = new TextureRegionDrawable(textureRegion);
         return new Image(drawable);
     }
