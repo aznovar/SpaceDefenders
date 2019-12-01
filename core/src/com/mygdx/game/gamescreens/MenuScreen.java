@@ -3,6 +3,8 @@ package com.mygdx.game.gamescreens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -11,9 +13,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.assets.Assets;
+import com.mygdx.game.gameworld.gameobjects.background.NewScrollingBackground;
+import com.mygdx.game.gameworld.gameobjects.background.ScrollingBackground;
 
 import static com.mygdx.game.MyGdxGame.SCALE_FACTOR;
 
@@ -26,6 +31,8 @@ public class MenuScreen extends ScreenAdapter {
     private Skin skin;
     private TextButton playButton;
     private TextButton settingsButton;
+    private Sprite background;
+    private NewScrollingBackground newScrBack;
 
     public MenuScreen(MyGdxGame newGame) {
         this.game = newGame;
@@ -35,7 +42,16 @@ public class MenuScreen extends ScreenAdapter {
 
     private void setupScreen() {
         batch = new SpriteBatch();
-
+        //TODO вынести scroll back в отдельный класс! Не забудь, ебана, а то повторов куча, пидор, сука
+        Array<Texture> textures = new Array<>();
+        for(int i = 1; i <=7;i++){
+            textures.add(new Texture(Gdx.files.internal("parallax/back_bright_000"+i+"_planet"+i+".png")));
+            textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
+        }
+        background = new Sprite(Assets.manager.get(Assets.backForSettings, Texture.class));
+        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        newScrBack = new NewScrollingBackground(textures,background);
+        newScrBack.setSpeed(1);
         skin = Assets.manager.get(Assets.uiskin, Skin.class);
         stageForMenu = new Stage(new ScreenViewport());
 
@@ -77,9 +93,13 @@ public class MenuScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+        batch.begin();
+        newScrBack.draw(batch);
+        batch.end();
         stageForMenu.act(Gdx.graphics.getDeltaTime());
         stageForMenu.draw();
+
+
     }
 
     @Override
