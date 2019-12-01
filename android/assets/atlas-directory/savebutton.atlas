@@ -1,0 +1,20 @@
+
+savebutton.png
+size: 256,64
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+settings_0003_save_button
+  rotate: false
+  xy: 2, 2
+  size: 75, 35
+  orig: 75, 35
+  offset: 0, 0
+  index: -1
+settings_0003_save_button_pressed
+  rotate: false
+  xy: 79, 2
+  size: 75, 35
+  orig: 75, 35
+  offset: 0, 0
+  index: -1

@@ -1,0 +1,20 @@
+
+backgroundwithclosebutton.png
+size: 1024,1024
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Settings_new
+  rotate: false
+  xy: 2, 45
+  size: 960, 540
+  orig: 960, 540
+  offset: 0, 0
+  index: -1
+element_0015_X_button
+  rotate: false
+  xy: 2, 2
+  size: 45, 41
+  orig: 45, 41
+  offset: 0, 0
+  index: -1
