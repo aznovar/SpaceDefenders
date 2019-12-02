@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * Created by Andrey Chelkanov(aznovar)
  */
-public class PlayerShip {
+public class PlayerShip extends Actor {
 
     private Rectangle rocket;
     private Texture rocketSheet;
@@ -62,14 +63,15 @@ public class PlayerShip {
         }
         return rocketFrame;
     }
-        //todo понять почему корабль улетает вниз на свою высоту
+
+    //todo понять костыль это или не костыль .....(это про умножение на два)
     public void correctBounds() {
         // Top bounds
         if (this.x < 0 - this.preferredShipWidth )
             this.x = 0 - this.preferredShipWidth;
         // Bottom bounds
-        if (this.x >  Gdx.graphics.getWidth() - this.preferredShipWidth)
-            this.x =  Gdx.graphics.getWidth() - this.preferredShipWidth;
+        if (this.x > Gdx.graphics.getWidth() - this.preferredShipWidth * 2)
+            this.x = Gdx.graphics.getWidth() - this.preferredShipWidth * 2;
         // Left bounds
         if (this.y < 0)
             this.y = 0;
