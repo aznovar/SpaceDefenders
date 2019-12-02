@@ -21,10 +21,10 @@ public class PlayerShip {
     private Rectangle rocket;
     private Texture rocketSheet;
     final static int ROCKET_FRAME_COLS = 4, ROCKET_FRAME_ROWS = 1;
-    private float x = Gdx.graphics.getWidth() / 2;
-    private float y = Gdx.graphics.getHeight() / 15;
+    private float x = Gdx.graphics.getWidth() - 300;
+    private float y = Gdx.graphics.getHeight() / 2;
     private float touchedX, touchedY, newX, newY;
-    private float speed = 1000;
+    private float speed = 5000;
     private float preferredShipWidth = 100;
     private float preferredShipHeight = 100;
     private float stateTime;
@@ -62,22 +62,22 @@ public class PlayerShip {
         }
         return rocketFrame;
     }
-
+        //todo понять почему корабль улетает вниз на свою высоту
     public void correctBounds() {
-        // Left bounds
-        if (this.x < 0)
-            this.x = 0;
-        // Right bounds
-        if (this.x > Gdx.graphics.getWidth() - this.preferredShipWidth) {
-            this.x = Gdx.graphics.getWidth() - this.preferredShipWidth;
-        }
+        // Top bounds
+        if (this.x < 0 - this.preferredShipWidth )
+            this.x = 0 - this.preferredShipWidth;
         // Bottom bounds
+        if (this.x >  Gdx.graphics.getWidth() - this.preferredShipWidth)
+            this.x =  Gdx.graphics.getWidth() - this.preferredShipWidth;
+        // Left bounds
         if (this.y < 0)
             this.y = 0;
-        // Top bounds
+        // Right bounds
         if (this.y > Gdx.graphics.getHeight() - this.preferredShipHeight)
             this.y = Gdx.graphics.getHeight() - this.preferredShipHeight;
     }
+
 
 //    private Vector2 lastTouch = new Vector2();
 //
@@ -152,6 +152,6 @@ public class PlayerShip {
 
     public void draw(SpriteBatch batch, float delta) {
         stateTime += delta;
-        batch.draw(setupAnimation().getKeyFrame(stateTime, true), this.x, this.y, this.preferredShipWidth, this.preferredShipHeight);
+        batch.draw(setupAnimation().getKeyFrame(stateTime, true), this.x, this.y, this.preferredShipWidth, this.preferredShipHeight ,this.preferredShipWidth,this.preferredShipHeight,1,1,90f);
     }
 }
