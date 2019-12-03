@@ -66,7 +66,7 @@ public class SettingsScreen extends ScreenAdapter {
 
     private Table addTableOnScreen(Button button) {
         SettingsUIFragment settingsUIFragment = new SettingsUIFragment();
-        Table table = settingsUIFragment.createTableLikeBackground(button);
+        Table table = settingsUIFragment.createTableLikeBackground(button, game);
         settingsUIFragment.createTableForFields();
         return table;
     }
