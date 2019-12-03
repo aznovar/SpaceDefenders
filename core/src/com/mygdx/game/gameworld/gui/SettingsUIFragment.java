@@ -2,6 +2,8 @@ package com.mygdx.game.gameworld.gui;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -11,9 +13,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.gamescreens.GameScreen;
 import com.mygdx.game.gamescreens.MenuScreen;
+import com.mygdx.game.gamescreens.SettingsScreen;
 
 /**
  * The class intended for fine tuning of the UI element - Settings
@@ -121,16 +125,10 @@ public class SettingsUIFragment implements OriginTableInterface {
         style.up = testSkin.getDrawable(Const.BACK_BUTTON_UNPR_TEXT);
         style.down = testSkin.getDrawable(Const.BACK_BUTTON_PR_TEXT);
         Button testB = new Button(style);
-        testB.addListener(new InputListener() {
+        testB.addListener(new ClickListener() {
             @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            }
-
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button)
-            {
+            public void clicked(InputEvent event, float x, float y) {
                 game.setScreen(new MenuScreen(game));
-                return true;
             }
         });
         return testB;

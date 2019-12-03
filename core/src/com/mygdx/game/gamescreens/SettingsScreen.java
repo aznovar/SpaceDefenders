@@ -44,13 +44,13 @@ public class SettingsScreen extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage);
 
         Array<Texture> textures = new Array<>();
-        for(int i = 1; i <=7;i++){
-            textures.add(new Texture(Gdx.files.internal("parallax/back_bright_000"+i+"_planet"+i+".png")));
-            textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
+        for (int i = 1; i <= 7; i++) {
+            textures.add(new Texture(Gdx.files.internal("parallax/back_bright_000" + i + "_planet" + i + ".png")));
+            textures.get(textures.size - 1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
         }
         background = new Sprite(Assets.manager.get(Assets.backForSettings, Texture.class));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        newScrBack = new NewScrollingBackground(textures,background);
+        newScrBack = new NewScrollingBackground(textures, background);
         newScrBack.setSpeed(1);
     }
 
