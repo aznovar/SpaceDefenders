@@ -18,7 +18,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.assets.Assets;
 import com.mygdx.game.gameworld.gameobjects.background.NewScrollingBackground;
-import com.mygdx.game.gameworld.gameobjects.background.ScrollingBackground;
 
 import static com.mygdx.game.MyGdxGame.SCALE_FACTOR;
 
