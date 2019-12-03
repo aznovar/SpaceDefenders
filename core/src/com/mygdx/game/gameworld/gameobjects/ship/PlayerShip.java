@@ -22,12 +22,13 @@ public class PlayerShip extends Actor {
     private Rectangle rocket;
     private Texture rocketSheet;
     final static int ROCKET_FRAME_COLS = 4, ROCKET_FRAME_ROWS = 1;
-    private float x = Gdx.graphics.getWidth() - 300;
-    private float y = Gdx.graphics.getHeight() / 2;
     private float touchedX, touchedY, newX, newY;
     private float speed = 5000;
     private float preferredShipWidth = 100;
     private float preferredShipHeight = 100;
+    private float x = preferredShipWidth;
+    private float y = Gdx.graphics.getHeight() / 2 - preferredShipHeight * 2;
+
     private float stateTime;
 //    private int[] coordToMoveX;
 //    private int[] coordToMoveY;
@@ -40,8 +41,8 @@ public class PlayerShip extends Actor {
 
     public Rectangle addRectangle() {
         rocket = new Rectangle();
-        rocket.x = Gdx.graphics.getWidth() / 6 - 100;
-        rocket.y = Gdx.graphics.getHeight() / 2 - 75;
+        rocket.x = Gdx.graphics.getWidth() / 2 - 100;
+        rocket.y = Gdx.graphics.getHeight() / 6 - 75;
         rocket.setCenter(rocket.x, rocket.y);
         rocket.width = 100;
         rocket.height = 150;
@@ -154,6 +155,6 @@ public class PlayerShip extends Actor {
 
     public void draw(SpriteBatch batch, float delta) {
         stateTime += delta;
-        batch.draw(setupAnimation().getKeyFrame(stateTime, true), this.x, this.y, this.preferredShipWidth, this.preferredShipHeight ,this.preferredShipWidth,this.preferredShipHeight,1,1,90f);
+        batch.draw(setupAnimation().getKeyFrame(stateTime, true), this.x, this.y, this.preferredShipWidth, this.preferredShipHeight, this.preferredShipWidth, this.preferredShipHeight, 1, 1, 270);
     }
 }

@@ -11,12 +11,14 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -54,17 +56,30 @@ public class GameScreen extends ScreenAdapter  {
 
 
 
-    public GameScreen(MyGdxGame newGame) {
-        SCALE_FACTOR = (100 / (720 * 100 / (float) Math.max(GENERAL_HEIGHT, GENERAL_WIDTH)) + 100 / (480 * 100 / (float) Math.min(GENERAL_HEIGHT, GENERAL_WIDTH))) / 2;
 
+    public GameScreen(MyGdxGame newGame) {
         this.game = newGame;
         stage = new Stage();
+        SetupGameScreen();
+
+//        touchpad = new Pad().setupTouchpad();
+//        stage.addActor(touchpad);
+    }
+
+    private void SetupGameScreen() {
+        SCALE_FACTOR = (100 / (720 * 100 / (float) Math.max(GENERAL_HEIGHT, GENERAL_WIDTH)) + 100 / (480 * 100 / (float) Math.min(GENERAL_HEIGHT, GENERAL_WIDTH))) / 2;
+
         Gdx.input.setInputProcessor(stage);
         batch = new SpriteBatch();
         pauseBtnUp = new ImageButton(new TextureRegionDrawable(new TextureRegion(Assets.manager.get(Assets.pauseBtnUp, Texture.class))));
-        pauseBtnUp.getImage().setScale(SCALE_FACTOR);
-        pauseBtnUp.setTransform(true);
-        pauseBtnUp.setRotation(90);
+        pauseBtnUp.getImage().setScale(SCALE_FACTOR * 2);
+        pauseBtnUp.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                batch.dispose();
+                game.setScreen(new MenuScreen(game));
+            }
+        });
 
 
         playerShip = new PlayerShip();
@@ -77,15 +92,12 @@ public class GameScreen extends ScreenAdapter  {
         pauseTable = new Table();
         pauseTable.setWidth(stage.getWidth());
         pauseTable.setWidth(stageForGame.getWidth());
-        pauseTable.align(Align.left | Align.top);
-        pauseTable.setPosition(75, 75);
+        pauseTable.align(Align.right | Align.center);
+        pauseTable.setPosition(-100, Gdx.graphics.getHeight() - 100);
         pauseTable.add(pauseBtnUp);
         Gdx.input.setInputProcessor(stageForGame);
 //        stageForGame.addActor(playerShip);
         stageForGame.addActor(pauseTable);
-
-//        touchpad = new Pad().setupTouchpad();
-//        stage.addActor(touchpad);
     }
 
     @Override
