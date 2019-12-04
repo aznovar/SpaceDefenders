@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,17 +17,18 @@ import java.util.List;
 /**
  * Created by Andrey Chelkanov(aznovar)
  */
-public class PlayerShip {
+public class PlayerShip extends Actor {
 
     private Rectangle rocket;
     private Texture rocketSheet;
     final static int ROCKET_FRAME_COLS = 4, ROCKET_FRAME_ROWS = 1;
-    private float x = Gdx.graphics.getWidth() / 2;
-    private float y = Gdx.graphics.getHeight() / 15;
     private float touchedX, touchedY, newX, newY;
-    private float speed = 1000;
+    private float speed = 5000;
     private float preferredShipWidth = 100;
     private float preferredShipHeight = 100;
+    private float x = preferredShipWidth;
+    private float y = Gdx.graphics.getHeight() / 2 - preferredShipHeight * 2;
+
     private float stateTime;
 //    private int[] coordToMoveX;
 //    private int[] coordToMoveY;
@@ -39,8 +41,8 @@ public class PlayerShip {
 
     public Rectangle addRectangle() {
         rocket = new Rectangle();
-        rocket.x = Gdx.graphics.getWidth() / 6 - 100;
-        rocket.y = Gdx.graphics.getHeight() / 2 - 75;
+        rocket.x = Gdx.graphics.getWidth() / 2 - 100;
+        rocket.y = Gdx.graphics.getHeight() / 6 - 75;
         rocket.setCenter(rocket.x, rocket.y);
         rocket.width = 100;
         rocket.height = 150;
@@ -63,21 +65,22 @@ public class PlayerShip {
         return rocketFrame;
     }
 
+    //todo понять костыль это или не костыль .....(это про умножение на два)
     public void correctBounds() {
-        // Left bounds
-        if (this.x < 0)
-            this.x = 0;
-        // Right bounds
-        if (this.x > Gdx.graphics.getWidth() - this.preferredShipWidth) {
-            this.x = Gdx.graphics.getWidth() - this.preferredShipWidth;
-        }
+        // Top bounds
+        if (this.x < 0 - this.preferredShipWidth )
+            this.x = 0 - this.preferredShipWidth;
         // Bottom bounds
+        if (this.x > Gdx.graphics.getWidth() - this.preferredShipWidth * 2)
+            this.x = Gdx.graphics.getWidth() - this.preferredShipWidth * 2;
+        // Left bounds
         if (this.y < 0)
             this.y = 0;
-        // Top bounds
+        // Right bounds
         if (this.y > Gdx.graphics.getHeight() - this.preferredShipHeight)
             this.y = Gdx.graphics.getHeight() - this.preferredShipHeight;
     }
+
 
 //    private Vector2 lastTouch = new Vector2();
 //
@@ -152,6 +155,6 @@ public class PlayerShip {
 
     public void draw(SpriteBatch batch, float delta) {
         stateTime += delta;
-        batch.draw(setupAnimation().getKeyFrame(stateTime, true), this.x, this.y, this.preferredShipWidth, this.preferredShipHeight);
+        batch.draw(setupAnimation().getKeyFrame(stateTime, true), this.x, this.y, this.preferredShipWidth, this.preferredShipHeight, this.preferredShipWidth, this.preferredShipHeight, 1, 1, 270);
     }
 }

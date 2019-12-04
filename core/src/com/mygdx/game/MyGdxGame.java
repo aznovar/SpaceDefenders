@@ -43,6 +43,7 @@ public class MyGdxGame extends Game {
         Assets.manager = new AssetManager();
         Assets.loadSkin();
         Assets.loadBackground();
+        Assets.loadPauseButton();
         Assets.manager.finishLoading();
     }
 }
