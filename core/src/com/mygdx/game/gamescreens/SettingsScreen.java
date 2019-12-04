@@ -14,12 +14,9 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.assets.Assets;
 import com.mygdx.game.gameworld.gameobjects.background.NewScrollingBackground;
-import com.mygdx.game.gameworld.gameobjects.background.ObjectHandler;
-import com.mygdx.game.gameworld.gameobjects.background.ScrollingBackground;
 import com.mygdx.game.gameworld.gui.InitCheckBox;
+import com.mygdx.game.gameworld.gui.OriginTableInterface;
 import com.mygdx.game.gameworld.gui.SettingsUIFragment;
-
-import java.util.List;
 
 public class SettingsScreen extends ScreenAdapter {
 
@@ -27,8 +24,6 @@ public class SettingsScreen extends ScreenAdapter {
     private SpriteBatch batch;
     private Sprite background;
     private Stage stage;
-    private ScrollingBackground scrBack;
-    private List<ObjectHandler> sprites;
     private NewScrollingBackground newScrBack;
 
     public SettingsScreen(MyGdxGame game) {
@@ -65,7 +60,7 @@ public class SettingsScreen extends ScreenAdapter {
     }
 
     private Table addTableOnScreen(Button button) {
-        SettingsUIFragment settingsUIFragment = new SettingsUIFragment();
+        OriginTableInterface settingsUIFragment = new SettingsUIFragment();
         Table table = settingsUIFragment.createTableLikeBackground(button, game);
         settingsUIFragment.createTableForFields();
         return table;

@@ -3,12 +3,12 @@ package com.mygdx.game.gameworld.gui;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.gameworld.gameobjects.buttons.RealizeTheButtons;
+import com.mygdx.game.gameworld.gameobjects.buttons.FunctionalityOfButtons;
 
 /**
  * A class containing methods that describe the approach to implementing classes for the GUI
  */
-interface OriginTableInterface {
+public interface OriginTableInterface {
 
     /**
      * A method that allows you to add a background to your table
@@ -29,5 +29,5 @@ interface OriginTableInterface {
      *
      * @return
      */
-    Table createTableForButtons(RealizeTheButtons realizeTheButtons, MyGdxGame game);
+    Table createTableForButtons(FunctionalityOfButtons functionalityOfButtons, MyGdxGame game);
 }

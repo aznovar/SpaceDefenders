@@ -9,7 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.gameworld.gameobjects.buttons.RealizeTheButtons;
+import com.mygdx.game.gameworld.gameobjects.buttons.FunctionalityOfButtons;
 
 
 /**
@@ -21,24 +21,22 @@ public class SettingsUIFragment implements OriginTableInterface {
 
     private static final Float PERCENT_OF_WIDTH = Gdx.graphics.getWidth() / 0.6f;
     private static final Float PERCENT_OF_HEIGHT = Gdx.graphics.getHeight() / 0.6f;
-    private RealizeTheButtons realizeTheButtons;
+    private FunctionalityOfButtons functionalityOfButtons;
 
     @Override
     public Table createTableLikeBackground(Button button, MyGdxGame game) {
         //TODO инъекция а не прямой вызов
-        realizeTheButtons = new RealizeTheButtons();
+        functionalityOfButtons = new FunctionalityOfButtons();
         Table settingsBackgroundTable = new Table();
         SettingsImage settingsImage = new SettingsImage();
         Image background = settingsImage.initBackground();
         settingsBackgroundTable.add(background).width(PERCENT_OF_WIDTH).height(PERCENT_OF_HEIGHT).expand().bottom();
         settingsBackgroundTable.row();
-        settingsBackgroundTable.add(createTableForCheckBoxes(button)).padTop(PERCENT_OF_HEIGHT / -0.88f);
+        settingsBackgroundTable.add(createTableForCheckBoxes()).padTop(PERCENT_OF_HEIGHT / -0.88f);
         settingsBackgroundTable.row();
         settingsBackgroundTable.add(createTableForFields()).padTop(PERCENT_OF_HEIGHT / -1.1f);
         settingsBackgroundTable.row();
-        settingsBackgroundTable.add(createTableForButtons(realizeTheButtons,game)).expand().padTop(PERCENT_OF_HEIGHT / -1.5f);
-        // settingsBackgroundTable.setDebug(true);
-        // settingsBackgroundTable.debugActor();
+        settingsBackgroundTable.add(createTableForButtons(functionalityOfButtons,game)).expand().padTop(PERCENT_OF_HEIGHT / -1.5f);
         settingsBackgroundTable.setFillParent(true);
         return settingsBackgroundTable;
     }
@@ -52,28 +50,24 @@ public class SettingsUIFragment implements OriginTableInterface {
         settingsFieldsTable.row();
         settingsFieldsTable.add(settingsImage.initImageForField().get(2)).width(220).height(50).padRight(25);
         settingsFieldsTable.add(initSlider()).width(550).height(70);
-        //  settingsFieldsTable.setDebug(true);
         return settingsFieldsTable;
     }
 
     @Override
-    public Table createTableForButtons(RealizeTheButtons realizeTheButtons, MyGdxGame game) {
+    public Table createTableForButtons(FunctionalityOfButtons functionalityOfButtons, MyGdxGame game) {
         Table settingsButtonSaveTable = new Table();
-        settingsButtonSaveTable.add(realizeTheButtons.initSaveButton()).width(200).height(100).padRight(25);
-        settingsButtonSaveTable.add(realizeTheButtons.initBackButton(game)).width(200).height(100).padRight(25);
-        //settingsButtonSaveTable.setDebug(true);
+        settingsButtonSaveTable.add(functionalityOfButtons.initSaveButton()).width(200).height(100).padRight(25);
+        settingsButtonSaveTable.add(functionalityOfButtons.initBackButton(game)).width(200).height(100).padRight(25);
         return settingsButtonSaveTable;
     }
 
-    private Table createTableForCheckBoxes(Button button) {
-        InitCheckBox buttonTwo = new InitCheckBox();
+    private Table createTableForCheckBoxes() {
         Table checkBoxesTable = new Table();
         SettingsImage settingsImage = new SettingsImage();
-        checkBoxesTable.add(button).width(65).height(60);
+        checkBoxesTable.add(functionalityOfButtons.initCheckBoxOne()).width(65).height(60);
         checkBoxesTable.add(settingsImage.initImageForCheckBoxesArea().get(1)).width(300).height(60).padLeft(15);
-        checkBoxesTable.add(buttonTwo.init()).width(65).height(60).padLeft(150);
+        checkBoxesTable.add(functionalityOfButtons.initCheckBoxTwo()).width(65).height(60).padLeft(150);
         checkBoxesTable.add(settingsImage.initImageForCheckBoxesArea().get(2)).width(300).height(60).padLeft(15);
-        // checkBoxesTable.setDebug(true);
         return checkBoxesTable;
     }
 
