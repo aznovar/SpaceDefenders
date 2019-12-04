@@ -8,11 +8,13 @@ import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -24,12 +26,15 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.assets.Assets;
+
+import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.assets.Assets;
+import com.mygdx.game.gameworld.gameobjects.background.NewScrollingBackground;
+
 import com.mygdx.game.gameworld.gameobjects.ship.PlayerShip;
-import com.mygdx.game.gameworld.gameobjects.touchpad.Pad;
 
-import javax.activation.MailcapCommandMap;
 
-import sun.audio.AudioPlayer;
 
 public class GameScreen extends ScreenAdapter  {
 
@@ -41,7 +46,6 @@ public class GameScreen extends ScreenAdapter  {
     private Stage stage;
     private PlayerShip playerShip;
     private SpriteBatch batch;
-    //    public Touchpad touchpad;
     public Texture touchpadBg, touchpadKonb, rocketSheet;
     Rectangle rocket;
     int ROCKET_SPEED = 100;
@@ -52,9 +56,8 @@ public class GameScreen extends ScreenAdapter  {
     private Skin skin;
     private Table pauseTable;
     private Stage stageForGame;
-
-
-
+    private Sprite background;
+    private NewScrollingBackground newScrBack;
 
 
     public GameScreen(MyGdxGame newGame) {
@@ -81,7 +84,16 @@ public class GameScreen extends ScreenAdapter  {
             }
         });
 
-
+        //TODO вынести scroll back в отдельный класс! Не забудь, ебана, а то повторов куча, пидор, сука
+        Array<Texture> textures = new Array<>();
+        for(int i = 1; i <=4;i++){
+            textures.add(new Texture(Gdx.files.internal("parallax/img"+i+".png")));
+            textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
+        }
+        background = new Sprite(Assets.manager.get(Assets.backForSettings, Texture.class));
+        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        newScrBack = new NewScrollingBackground(textures,background);
+        newScrBack.setSpeed(1);
         playerShip = new PlayerShip();
         rocket = playerShip.addRectangle();
         rocketAnimation = playerShip.setupAnimation();
@@ -108,6 +120,7 @@ public class GameScreen extends ScreenAdapter  {
 //        update();
         batch.begin();
 //        batch.draw(RocketcurrentFrame, rocket.x, rocket.y, rocket.width, rocket.height);
+        newScrBack.draw(batch);
         playerShip.performInput(delta);
         playerShip.draw(batch,delta);
         batch.end();

@@ -1,6 +1,9 @@
 package com.mygdx.game.gameworld.gui;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.mygdx.game.MyGdxGame;
 
 /**
  * A class containing methods that describe the approach to implementing classes for the GUI
@@ -12,7 +15,7 @@ interface OriginTableInterface {
      *
      * @return
      */
-    Table createTableLikeBackground();
+    Table createTableLikeBackground(Button button, MyGdxGame game);
 
     /**
      * A method that allows you to add fields to your table
@@ -26,5 +29,5 @@ interface OriginTableInterface {
      *
      * @return
      */
-    Table createTableForButtons();
+    Table createTableForButtons(MyGdxGame game);
 }

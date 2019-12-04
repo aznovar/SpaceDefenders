@@ -1,6 +1,6 @@
 package com.mygdx.game.gameworld.gui;
 
-import com.badlogic.gdx.graphics.Texture;
+
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -30,8 +30,8 @@ public class SettingsImage {
 
     public Image initBackground(){
         //TODO переделать на Button with ButtonStyle и выделить в один метод, т.к. повторы
-        TextureAtlas textureAtlas = new TextureAtlas(Const.ATLAS_DIRECTORY);
-        TextureRegion textureRegion = textureAtlas.findRegion(Const.BACKGROUND_FOR_SETTINGS_TABLE);
+        TextureAtlas textureAtlas = new TextureAtlas(Const.NEW_BACKGROUND_ATLAS);
+        TextureRegion textureRegion = textureAtlas.findRegion(Const.NEW_BACKGROUND);
         Drawable drawable = new TextureRegionDrawable(textureRegion);
         return new Image(drawable);
     }
@@ -60,11 +60,12 @@ public class SettingsImage {
         return new Image(drawable);
     }
 
+
     public List<Image> initImageForCheckBoxesArea() {
         //TODO переделать на Button with ButtonStyle и выделить в один метод, т.к. повторы
         List<Image> listofImage = new ArrayList<>();
         TextureAtlas textureAtlas = new TextureAtlas((Const.ATLAS_DIRECTORY));
-        TextureRegion textureRegionCheckBox = textureAtlas.findRegion(Const.CHECK_BOX);
+        TextureRegion textureRegionCheckBox = textureAtlas.findRegion(Const.CHECK_BOX_OFF);
         TextureRegion textureMusic = textureAtlas.findRegion(Const.MUSIC);
         TextureRegion textureSound = textureAtlas.findRegion(Const.SOUND);
         Drawable drawableUntouchCheckBox = new TextureRegionDrawable(textureRegionCheckBox);
