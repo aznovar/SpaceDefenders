@@ -1,23 +1,16 @@
 package com.mygdx.game.gameworld.gui;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.gamescreens.GameScreen;
-import com.mygdx.game.gamescreens.MenuScreen;
-import com.mygdx.game.gamescreens.SettingsScreen;
+import com.mygdx.game.gameworld.gameobjects.buttons.RealizeTheButtons;
+
 
 /**
  * The class intended for fine tuning of the UI element - Settings
@@ -28,9 +21,12 @@ public class SettingsUIFragment implements OriginTableInterface {
 
     private static final Float PERCENT_OF_WIDTH = Gdx.graphics.getWidth() / 0.6f;
     private static final Float PERCENT_OF_HEIGHT = Gdx.graphics.getHeight() / 0.6f;
+    private RealizeTheButtons realizeTheButtons;
 
     @Override
     public Table createTableLikeBackground(Button button, MyGdxGame game) {
+        //TODO инъекция а не прямой вызов
+        realizeTheButtons = new RealizeTheButtons();
         Table settingsBackgroundTable = new Table();
         SettingsImage settingsImage = new SettingsImage();
         Image background = settingsImage.initBackground();
@@ -40,7 +36,7 @@ public class SettingsUIFragment implements OriginTableInterface {
         settingsBackgroundTable.row();
         settingsBackgroundTable.add(createTableForFields()).padTop(PERCENT_OF_HEIGHT / -1.1f);
         settingsBackgroundTable.row();
-        settingsBackgroundTable.add(createTableForButtons(game)).expand().padTop(PERCENT_OF_HEIGHT / -1.5f);
+        settingsBackgroundTable.add(createTableForButtons(realizeTheButtons,game)).expand().padTop(PERCENT_OF_HEIGHT / -1.5f);
         // settingsBackgroundTable.setDebug(true);
         // settingsBackgroundTable.debugActor();
         settingsBackgroundTable.setFillParent(true);
@@ -61,15 +57,15 @@ public class SettingsUIFragment implements OriginTableInterface {
     }
 
     @Override
-    public Table createTableForButtons(MyGdxGame game) {
+    public Table createTableForButtons(RealizeTheButtons realizeTheButtons, MyGdxGame game) {
         Table settingsButtonSaveTable = new Table();
-        settingsButtonSaveTable.add(initSaveButton()).width(200).height(100).padRight(25);
-        settingsButtonSaveTable.add(initBackButton(game)).width(200).height(100).padRight(25);
+        settingsButtonSaveTable.add(realizeTheButtons.initSaveButton()).width(200).height(100).padRight(25);
+        settingsButtonSaveTable.add(realizeTheButtons.initBackButton(game)).width(200).height(100).padRight(25);
         //settingsButtonSaveTable.setDebug(true);
         return settingsButtonSaveTable;
     }
 
-    public Table createTableForCheckBoxes(Button button) {
+    private Table createTableForCheckBoxes(Button button) {
         InitCheckBox buttonTwo = new InitCheckBox();
         Table checkBoxesTable = new Table();
         SettingsImage settingsImage = new SettingsImage();
@@ -98,40 +94,5 @@ public class SettingsUIFragment implements OriginTableInterface {
         return contOfSl;
     }
 
-    private Button initSaveButton() {
-        TextureAtlas textureAtlas = new TextureAtlas(Const.SAVE_BUTTON_WITH_TEXT);
-        Skin testSkin = new Skin(textureAtlas);
-        Button.ButtonStyle style = new Button.ButtonStyle();
-        style.up = testSkin.getDrawable(Const.SAVE_BUTTON_UNPR_TEXT);
-        style.down = testSkin.getDrawable(Const.SAVE_BUTTON_PR_TEXT);
-        Button testB = new Button(style);
-        testB.addListener(new InputListener() {
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-            }
-
-            @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                return true;
-            }
-        });
-        return testB;
-    }
-
-    private Button initBackButton(MyGdxGame game) {
-        TextureAtlas textureAtlas = new TextureAtlas(Const.BACK_BUTTON_WITH_TEXT);
-        Skin testSkin = new Skin(textureAtlas);
-        Button.ButtonStyle style = new Button.ButtonStyle();
-        style.up = testSkin.getDrawable(Const.BACK_BUTTON_UNPR_TEXT);
-        style.down = testSkin.getDrawable(Const.BACK_BUTTON_PR_TEXT);
-        Button testB = new Button(style);
-        testB.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new MenuScreen(game));
-            }
-        });
-        return testB;
-    }
 }
 

@@ -1,9 +1,9 @@
 package com.mygdx.game.gameworld.gui;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.gameworld.gameobjects.buttons.RealizeTheButtons;
 
 /**
  * A class containing methods that describe the approach to implementing classes for the GUI
@@ -29,5 +29,5 @@ interface OriginTableInterface {
      *
      * @return
      */
-    Table createTableForButtons(MyGdxGame game);
+    Table createTableForButtons(RealizeTheButtons realizeTheButtons, MyGdxGame game);
 }

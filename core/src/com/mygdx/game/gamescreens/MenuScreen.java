@@ -38,18 +38,17 @@ public class MenuScreen extends ScreenAdapter {
         setupScreen();
     }
 
-
     private void setupScreen() {
         batch = new SpriteBatch();
         //TODO вынести scroll back в отдельный класс! Не забудь, ебана, а то повторов куча, пидор, сука
         Array<Texture> textures = new Array<>();
-        for(int i = 1; i <=7;i++){
-            textures.add(new Texture(Gdx.files.internal("parallax/back_bright_000"+i+"_planet"+i+".png")));
-            textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
+        for (int i = 1; i <= 7; i++) {
+            textures.add(new Texture(Gdx.files.internal("parallax/back_bright_000" + i + "_planet" + i + ".png")));
+            textures.get(textures.size - 1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
         }
         background = new Sprite(Assets.manager.get(Assets.backForSettings, Texture.class));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        newScrBack = new NewScrollingBackground(textures,background);
+        newScrBack = new NewScrollingBackground(textures, background);
         newScrBack.setSpeed(1);
         skin = Assets.manager.get(Assets.uiskin, Skin.class);
         stageForMenu = new Stage(new ScreenViewport());
@@ -60,7 +59,6 @@ public class MenuScreen extends ScreenAdapter {
         menuTable.setPosition(0, MyGdxGame.GENERAL_HEIGHT);
 
         playButton = new TextButton("Play", skin);
-
         playButton.getLabel().setFontScale(2.2f * SCALE_FACTOR);
         playButton.addListener(new ClickListener() {
             @Override
@@ -71,7 +69,6 @@ public class MenuScreen extends ScreenAdapter {
         });
 
         settingsButton = new TextButton("Settings", skin);
-
         settingsButton.getLabel().setFontScale(2.2f * SCALE_FACTOR);
         settingsButton.addListener(new ClickListener() {
             @Override
@@ -97,8 +94,6 @@ public class MenuScreen extends ScreenAdapter {
         batch.end();
         stageForMenu.act(Gdx.graphics.getDeltaTime());
         stageForMenu.draw();
-
-
     }
 
     @Override

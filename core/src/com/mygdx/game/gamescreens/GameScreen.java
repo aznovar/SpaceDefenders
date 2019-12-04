@@ -1,8 +1,6 @@
 package com.mygdx.game.gamescreens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
@@ -15,11 +13,9 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Touchpad;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Align;
@@ -28,15 +24,12 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.assets.Assets;
 
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.assets.Assets;
 import com.mygdx.game.gameworld.gameobjects.background.NewScrollingBackground;
 
 import com.mygdx.game.gameworld.gameobjects.ship.PlayerShip;
 
 
-
-public class GameScreen extends ScreenAdapter  {
+public class GameScreen extends ScreenAdapter {
 
 
     private static float SCALE_FACTOR;
@@ -46,11 +39,9 @@ public class GameScreen extends ScreenAdapter  {
     private Stage stage;
     private PlayerShip playerShip;
     private SpriteBatch batch;
-    public Texture touchpadBg, touchpadKonb, rocketSheet;
+    public Texture rocketSheet;
     Rectangle rocket;
-    int ROCKET_SPEED = 100;
     public Animation<TextureRegion> rocketAnimation;
-    float stateTime;
     private Controller controller;
     private ImageButton pauseBtnUp;
     private Skin skin;
@@ -63,13 +54,13 @@ public class GameScreen extends ScreenAdapter  {
     public GameScreen(MyGdxGame newGame) {
         this.game = newGame;
         stage = new Stage();
-        SetupGameScreen();
+        setupGameScreen();
 
 //        touchpad = new Pad().setupTouchpad();
 //        stage.addActor(touchpad);
     }
 
-    private void SetupGameScreen() {
+    private void setupGameScreen() {
         SCALE_FACTOR = (100 / (720 * 100 / (float) Math.max(GENERAL_HEIGHT, GENERAL_WIDTH)) + 100 / (480 * 100 / (float) Math.min(GENERAL_HEIGHT, GENERAL_WIDTH))) / 2;
 
         Gdx.input.setInputProcessor(stage);
@@ -86,13 +77,13 @@ public class GameScreen extends ScreenAdapter  {
 
         //TODO вынести scroll back в отдельный класс! Не забудь, ебана, а то повторов куча, пидор, сука
         Array<Texture> textures = new Array<>();
-        for(int i = 1; i <=4;i++){
-            textures.add(new Texture(Gdx.files.internal("parallax/img"+i+".png")));
-            textures.get(textures.size-1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
+        for (int i = 1; i <= 4; i++) {
+            textures.add(new Texture(Gdx.files.internal("parallax/img" + i + ".png")));
+            textures.get(textures.size - 1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
         }
         background = new Sprite(Assets.manager.get(Assets.backForSettings, Texture.class));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        newScrBack = new NewScrollingBackground(textures,background);
+        newScrBack = new NewScrollingBackground(textures, background);
         newScrBack.setSpeed(1);
         playerShip = new PlayerShip();
         rocket = playerShip.addRectangle();
@@ -122,7 +113,7 @@ public class GameScreen extends ScreenAdapter  {
 //        batch.draw(RocketcurrentFrame, rocket.x, rocket.y, rocket.width, rocket.height);
         newScrBack.draw(batch);
         playerShip.performInput(delta);
-        playerShip.draw(batch,delta);
+        playerShip.draw(batch, delta);
         batch.end();
 
         stageForGame.act(Gdx.graphics.getDeltaTime());
@@ -132,8 +123,6 @@ public class GameScreen extends ScreenAdapter  {
 
 //        stage.act();
 //        stage.draw();
-
-
 
 
     }
@@ -162,6 +151,7 @@ public class GameScreen extends ScreenAdapter  {
     public void hide() {
         Gdx.app.log("GameScreen", "hide called");
     }
+
     @Override
     public void dispose() {
         batch.dispose();
@@ -170,8 +160,6 @@ public class GameScreen extends ScreenAdapter  {
 //        touchpadKonb.dispose();
         stage.dispose();
     }
-
-
 
 
 }
