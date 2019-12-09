@@ -20,7 +20,7 @@ public class PlayerShip {
 
     private Rectangle rocket;
     private Texture rocketSheet;
-    final static int ROCKET_FRAME_COLS = 4, ROCKET_FRAME_ROWS = 1;
+    final static int ROCKET_FRAME_COLS = 4, ROCKET_FRAME_ROWS = 8;
     private float x = Gdx.graphics.getWidth() / 2;
     private float y = Gdx.graphics.getHeight() / 15;
     private float touchedX, touchedY, newX, newY;
@@ -48,7 +48,7 @@ public class PlayerShip {
     }
 
     private TextureRegion[] setupTexture() {
-        rocketSheet = new Texture("spaceShipSprite.png");
+        rocketSheet = new Texture("ship_with_fire.png");
         TextureRegion[][] Rtmp = TextureRegion.split(rocketSheet,
                 rocketSheet.getWidth() / ROCKET_FRAME_COLS,
                 rocketSheet.getHeight() / ROCKET_FRAME_ROWS);
