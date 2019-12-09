@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Array;
 
-public class NewScrollingBackground {
+public class OriginScrollingBackground {
 
     private int scroll;
     private Array<Texture> layers;
@@ -20,7 +20,7 @@ public class NewScrollingBackground {
 
     private double speed;
 
-    public NewScrollingBackground(Array<Texture> textures, Sprite background) {
+    public OriginScrollingBackground(Array<Texture> textures, Sprite background) {
         layers = textures;
         for (int i = 0; i < textures.size; i++) {
             layers.get(i).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);

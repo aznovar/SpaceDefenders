@@ -68,7 +68,7 @@ public class PlayerShip extends Actor {
     //todo понять костыль это или не костыль .....(это про умножение на два)
     public void correctBounds() {
         // Top bounds
-        if (this.x < 0 - this.preferredShipWidth )
+        if (this.x < 0 - this.preferredShipWidth)
             this.x = 0 - this.preferredShipWidth;
         // Bottom bounds
         if (this.x > Gdx.graphics.getWidth() - this.preferredShipWidth * 2)

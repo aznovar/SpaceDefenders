@@ -53,4 +53,8 @@ public final class Const {
     public static final String NEW_BACKGROUND_ATLAS = "atlas-directory/backgroundwithclosebutton.atlas";
 
     public static final String NEW_BACKGROUND = "Settings_new";
+
+    public static final String MAINPARALLAX = "parallax/mainparallax/back_bright_planet";
+
+    public static final String GAMEPARALLAX = "parallax/gamescreenparallax/img";
 }

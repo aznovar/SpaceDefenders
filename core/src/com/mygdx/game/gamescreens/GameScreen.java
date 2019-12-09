@@ -2,7 +2,6 @@ package com.mygdx.game.gamescreens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -24,9 +23,11 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.assets.Assets;
 
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.gameworld.gameobjects.background.NewScrollingBackground;
+import com.mygdx.game.gameworld.gameobjects.background.ConfigureBackground;
+import com.mygdx.game.gameworld.gameobjects.background.OriginScrollingBackground;
 
 import com.mygdx.game.gameworld.gameobjects.ship.PlayerShip;
+import com.mygdx.game.gameworld.gui.Const;
 
 
 public class GameScreen extends ScreenAdapter {
@@ -42,13 +43,12 @@ public class GameScreen extends ScreenAdapter {
     public Texture rocketSheet;
     Rectangle rocket;
     public Animation<TextureRegion> rocketAnimation;
-    private Controller controller;
     private ImageButton pauseBtnUp;
     private Skin skin;
     private Table pauseTable;
     private Stage stageForGame;
     private Sprite background;
-    private NewScrollingBackground newScrBack;
+    private OriginScrollingBackground newScrBack;
 
 
     public GameScreen(MyGdxGame newGame) {
@@ -75,16 +75,7 @@ public class GameScreen extends ScreenAdapter {
             }
         });
 
-        //TODO вынести scroll back в отдельный класс! Не забудь, ебана, а то повторов куча, пидор, сука
-        Array<Texture> textures = new Array<>();
-        for (int i = 1; i <= 4; i++) {
-            textures.add(new Texture(Gdx.files.internal("parallax/img" + i + ".png")));
-            textures.get(textures.size - 1).setWrap(Texture.TextureWrap.MirroredRepeat, Texture.TextureWrap.MirroredRepeat);
-        }
-        background = new Sprite(Assets.manager.get(Assets.backForSettings, Texture.class));
-        background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        newScrBack = new NewScrollingBackground(textures, background);
-        newScrBack.setSpeed(1);
+        newScrBack = ConfigureBackground.createScrollingBackground(Assets.backForSettings, Const.GAMEPARALLAX, 4);
         playerShip = new PlayerShip();
         rocket = playerShip.addRectangle();
         rocketAnimation = playerShip.setupAnimation();

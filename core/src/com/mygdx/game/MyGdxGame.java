@@ -4,14 +4,12 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.assets.Assets;
 import com.mygdx.game.gamescreens.MenuScreen;
 
 public class MyGdxGame extends Game {
     private SpriteBatch batch;
-    private Texture img;
     public static Application.ApplicationType applicationType;
     public static int GENERAL_WIDTH = 480; // 480
     public static int GENERAL_HEIGHT = 720; // 720
@@ -35,7 +33,6 @@ public class MyGdxGame extends Game {
     @Override
     public void dispose() {
         batch.dispose();
-        img.dispose();
         Assets.dispose();
     }
 
