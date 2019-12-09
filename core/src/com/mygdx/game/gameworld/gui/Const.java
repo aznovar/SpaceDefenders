@@ -44,7 +44,17 @@ public final class Const {
 
     public static final String SAVE_BUTTON_PR_TEXT = "settings_0003_save_button_pressed_with_text";
 
+    public static final String BACK_BUTTON_WITH_TEXT = "atlas-directory/back.atlas";
+
+    public static final String BACK_BUTTON_PR_TEXT = "settings_0003_back_button_p";
+
+    public static final String BACK_BUTTON_UNPR_TEXT = "settings_0003_back_button_unp";
+
     public static final String NEW_BACKGROUND_ATLAS = "atlas-directory/backgroundwithclosebutton.atlas";
 
     public static final String NEW_BACKGROUND = "Settings_new";
+
+    public static final String MAINPARALLAX = "parallax/mainparallax/back_bright_planet";
+
+    public static final String GAMEPARALLAX = "parallax/gamescreenparallax/img";
 }
