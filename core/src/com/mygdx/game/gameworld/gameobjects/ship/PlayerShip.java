@@ -20,6 +20,7 @@ public class PlayerShip {
 
     private Rectangle rocket;
     private Texture rocketSheet;
+    private Texture engineFire;
     final static int ROCKET_FRAME_COLS = 4, ROCKET_FRAME_ROWS = 8;
     private float x = Gdx.graphics.getWidth() / 2;
     private float y = Gdx.graphics.getHeight() / 15;
@@ -48,7 +49,8 @@ public class PlayerShip {
     }
 
     private TextureRegion[] setupTexture() {
-        rocketSheet = new Texture("ship_with_fire.png");
+        rocketSheet = new Texture("ship_asset7.png");
+
         TextureRegion[][] Rtmp = TextureRegion.split(rocketSheet,
                 rocketSheet.getWidth() / ROCKET_FRAME_COLS,
                 rocketSheet.getHeight() / ROCKET_FRAME_ROWS);
@@ -57,11 +59,26 @@ public class PlayerShip {
         for (int i = 0; i < ROCKET_FRAME_ROWS; i++) {
             for (int j = 0; j < ROCKET_FRAME_COLS; j++) {
                 rocketFrame[Rindex++] = Rtmp[i][j];
+
             }
 
         }
         return rocketFrame;
     }
+
+//    private TextureRegion[] setupTexture() {
+//        rocketSheet = new Texture("spaceShip/ship_asset7.png");
+//        int flameIndex = 0;
+//        TextureRegion[] rocketFrame = new TextureRegion[32];
+//        for (int i = 0; i < 16; i++) {
+//            for (int j = 16; j <= 16; j--) {
+//                engineFire = new Texture("spaceShip/simple_flight/fire_000" + i + "_" + j + ".png");
+//                TextureRegion[] rrr = TextureRegion.
+//                rocketFrame[flameIndex++] = engineFire;
+//            }
+//        }
+//        return rocketFrame;
+//    }
 
     public void correctBounds() {
         // Left bounds
